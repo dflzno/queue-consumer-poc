@@ -17,11 +17,13 @@ repositories {
 dependencies {
 
 	ext {
+	
 		springVersion = '4.1.4.RELEASE'
 		springBatchVersion = '3.0.6.RELEASE'
 		testNgVersion = '6.9.10'
 		activeMqVersion = '5.13.2'
 		slf4jVersion = '1.7.21'
+		mockitoVersion = '1.10.19'
 	}
 
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -38,6 +40,7 @@ dependencies {
    	runtime "org.springframework:spring-tx:${springBatchVersion}"
    	compile "org.springframework:spring-oxm:${springVersion}"
    	compile "org.springframework:spring-jms:${springVersion}"
+   	testCompile "org.mockito:mockito-all:${mockitoVersion}"
 }
 
 test {
