@@ -11,11 +11,22 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import jms.example.publisher.messagecreators.TextMessageCreator;
+
 @Service
 public class JmsMessageSender {
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
+	
+	private MessageCreator messageCreator;
+	
+	public JmsMessageSender() {
+	}
+	
+	public JmsMessageSender(MessageCreator messageCreator) {
+		this.messageCreator = messageCreator;
+	}
 
 	/**
 	 * send text to default destination
@@ -23,17 +34,7 @@ public class JmsMessageSender {
 	 * @param text
 	 */
 	public void send(final String text) {
-
-		this.jmsTemplate.send(new MessageCreator() {
-			@Override
-			public Message createMessage(Session session) throws JMSException {
-				Message message = session.createTextMessage(text);
-				// set ReplyTo header of Message, pretty much like the concept
-				// of email.
-				message.setJMSReplyTo(new ActiveMQQueue("Recv2Send"));
-				return message;
-			}
-		});
+		this.jmsTemplate.send(getMessageCreator(text));
 	}
 
 	/**
@@ -60,4 +61,15 @@ public class JmsMessageSender {
 			}
 		});
 	}
+	
+	private MessageCreator getMessageCreator(String text) {
+		return messageCreator;		
+	}
+	
+//	public Message createMessage(Session session) throws JMSException {
+//		Message message = session.createTextMessage(text);
+//		message.setJMSReplyTo(new ActiveMQQueue("Recv2Send"));
+//		return message;
+//	}
+	
 }

@@ -6,13 +6,13 @@ import static org.mockito.Mockito.verify;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class JmsMessageSenderTest {
+import base.TestWithMockito;
+
+public class JmsMessageSenderTest extends TestWithMockito {
 
 	@Mock
 	private JmsTemplate jmsTemplate;
@@ -20,13 +20,8 @@ public class JmsMessageSenderTest {
 	@InjectMocks
 	private JmsMessageSender testSubject;
 	
-	@BeforeMethod  
-	public void injectDoubles() {
-		MockitoAnnotations.initMocks(this);
-	}
-	
 	@Test
-	public void shouldSendAMessageToDefaultLocation() {
+	public void shouldSendAMessageToDefaultDestination() {
 		//given
 		String message = "This is a message";
 		
