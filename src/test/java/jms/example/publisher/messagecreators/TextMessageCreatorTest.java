@@ -3,13 +3,16 @@ package jms.example.publisher.messagecreators;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 
+import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTextMessage;
 import org.testng.annotations.Test;
 
 public class TextMessageCreatorTest {
@@ -23,7 +26,8 @@ public class TextMessageCreatorTest {
 		//given
 		TextMessageCreator.Builder builder = getBaseBuilder("MessagePayload");
 		testSubject = builder.build();
-		when(session.createTextMessage(anyString())).thenReturn(mock(TextMessage.class));
+		
+		when(session.createTextMessage(anyString())).thenReturn(new ActiveMQTextMessage());
 		
 		//when
 		Message message = testSubject.createMessage(session);
@@ -33,15 +37,21 @@ public class TextMessageCreatorTest {
 	}
 	
 	@Test
-	public void shouldCreateAMessageAWithGivenJMSReplyTo() {
+	public void shouldCreateAMessageAWithGivenJMSReplyTo() throws JMSException {
 		//given
-		TextMessageCreator.Builder builder = getBaseBuilder("Message Payload");
+		Destination replyTo = new ActiveMQQueue("ReplyToAnyQueue");
 		
-		//when
+		TextMessageCreator.Builder builder = getBaseBuilder("Message Payload");
+		builder.withReplyTo(replyTo);
 		testSubject = builder.build();
 		
+		when(session.createTextMessage(anyString())).thenReturn(new ActiveMQTextMessage());
+		
+		//when
+		Message message = testSubject.createMessage(session);
+		
 		//then
-		//assert
+		assertEquals(message.getJMSReplyTo(), replyTo);
 	}
 	
 	private TextMessageCreator.Builder getBaseBuilder(String text) {
