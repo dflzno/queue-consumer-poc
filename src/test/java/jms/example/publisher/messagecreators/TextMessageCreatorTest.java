@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -24,7 +25,7 @@ public class TextMessageCreatorTest {
 	@Test
 	public void shouldReturnAMessage() throws JMSException {
 		//given
-		TextMessageCreator.Builder builder = getBaseBuilder("MessagePayload");
+		TextMessageCreator.Builder builder = getBaseBuilder();
 		testSubject = builder.build();
 		
 		when(session.createTextMessage(anyString())).thenReturn(new ActiveMQTextMessage());
@@ -41,7 +42,7 @@ public class TextMessageCreatorTest {
 		//given
 		Destination replyTo = new ActiveMQQueue("ReplyToAnyQueue");
 		
-		TextMessageCreator.Builder builder = getBaseBuilder("Message Payload");
+		TextMessageCreator.Builder builder = getBaseBuilder();
 		builder.withReplyTo(replyTo);
 		testSubject = builder.build();
 		
@@ -54,7 +55,22 @@ public class TextMessageCreatorTest {
 		assertEquals(message.getJMSReplyTo(), replyTo);
 	}
 	
-	private TextMessageCreator.Builder getBaseBuilder(String text) {
-		return new TextMessageCreator.Builder(text);
+	@Test
+	public void shouldCreateAMessageWithNoReplyToAttribute() throws JMSException {
+		//given
+		TextMessageCreator.Builder builder = getBaseBuilder();
+		testSubject = builder.build();
+		
+		when(session.createTextMessage(anyString())).thenReturn(new ActiveMQTextMessage());
+		
+		//when
+		Message message = testSubject.createMessage(session);
+		
+		//then
+		assertNull(message.getJMSReplyTo());
+	}
+	
+	private TextMessageCreator.Builder getBaseBuilder() {
+		return new TextMessageCreator.Builder("Message Payload");
 	}
 }

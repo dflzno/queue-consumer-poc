@@ -1,11 +1,7 @@
 package jms.example.publisher;
 
 import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
 
-import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -13,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import jms.example.publisher.messagecreators.TextMessageCreator;
 
+/**
+ * Class in charge of sending messages to a JMS Queue
+ */
 @Service
 public class JmsMessageSender {
 
@@ -20,16 +19,17 @@ public class JmsMessageSender {
 	private JmsTemplate jmsTemplate;
 	
 	private MessageCreator messageCreator;
-	
-	public JmsMessageSender() {
-	}
-	
-	public JmsMessageSender(MessageCreator messageCreator) {
+
+	/**
+	 * Reconfigures the JmsMessageSender with a client-specific MessageCreator
+	 * @param messageCreator
+	 */
+	public void setMessageCreator(MessageCreator messageCreator) {
 		this.messageCreator = messageCreator;
 	}
 
 	/**
-	 * send text to default destination
+	 * Send text to default destination
 	 * 
 	 * @param text
 	 */
@@ -52,24 +52,16 @@ public class JmsMessageSender {
 	 * @param text
 	 */
 	public void send(final Destination dest, final String text) {
-
-		this.jmsTemplate.send(dest, new MessageCreator() {
-			@Override
-			public Message createMessage(Session session) throws JMSException {
-				Message message = session.createTextMessage(text);
-				return message;
-			}
-		});
+		this.jmsTemplate.send(dest, getMessageCreator(text));
 	}
 	
+	/**
+	 * 
+	 * @param text
+	 * @return
+	 */
 	private MessageCreator getMessageCreator(String text) {
-		return messageCreator;		
+		return messageCreator != null ? messageCreator : new TextMessageCreator.Builder(text).build();
 	}
-	
-//	public Message createMessage(Session session) throws JMSException {
-//		Message message = session.createTextMessage(text);
-//		message.setJMSReplyTo(new ActiveMQQueue("Recv2Send"));
-//		return message;
-//	}
 	
 }

@@ -10,6 +10,8 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+
 repositories {
 
     mavenCentral()
@@ -32,6 +34,7 @@ dependencies {
 	compile "org.apache.activemq:activemq-spring:${activeMqVersion}"
 
     testCompile "org.testng:testng:${testNgVersion}"
+    testCompile "org.mockito:mockito-all:${mockitoVersion}"
     
     //Spring
     compile "org.springframework:spring-context:${springVersion}"
@@ -40,8 +43,7 @@ dependencies {
    	runtime "org.springframework.batch:spring-batch-core:${springBatchVersion}"
    	runtime "org.springframework:spring-tx:${springBatchVersion}"
    	compile "org.springframework:spring-oxm:${springVersion}"
-   	compile "org.springframework:spring-jms:${springVersion}"
-   	testCompile "org.mockito:mockito-all:${mockitoVersion}"
+   	compile "org.springframework:spring-jms:${springVersion}"   	
 }
 
 test {
