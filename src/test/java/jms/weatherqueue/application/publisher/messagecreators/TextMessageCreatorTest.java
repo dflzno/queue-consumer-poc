@@ -1,4 +1,4 @@
-package jms.example.publisher.messagecreators;
+package jms.weatherqueue.application.publisher.messagecreators;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;

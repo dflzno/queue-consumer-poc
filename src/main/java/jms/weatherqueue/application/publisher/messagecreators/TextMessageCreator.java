@@ -1,4 +1,4 @@
-package jms.example.publisher.messagecreators;
+package jms.weatherqueue.application.publisher.messagecreators;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -9,7 +9,7 @@ import org.springframework.jms.core.MessageCreator;
 
 /**
  * Instances of this class must be created through it's companion builder
- * {@link jms.example.publisher.messagecreators.TextMessageCreator.Builder}
+ * {@link jms.example.application.publisher.messagecreators.TextMessageCreator.Builder}
  */
 public class TextMessageCreator implements MessageCreator {
 	

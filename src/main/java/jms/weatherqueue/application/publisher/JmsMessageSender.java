@@ -1,4 +1,4 @@
-package jms.example.publisher;
+package jms.weatherqueue.application.publisher;
 
 import javax.jms.Destination;
 
@@ -7,7 +7,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
-import jms.example.publisher.messagecreators.TextMessageCreator;
+import jms.weatherqueue.application.publisher.messagecreators.TextMessageCreator;
 
 /**
  * Class in charge of sending messages to a JMS Queue

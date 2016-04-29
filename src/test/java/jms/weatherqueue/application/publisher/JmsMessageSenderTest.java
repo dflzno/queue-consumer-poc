@@ -1,4 +1,4 @@
-package jms.example.publisher;
+package jms.weatherqueue.application.publisher;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -16,7 +16,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import base.TestWithMockito;
-import jms.example.publisher.messagecreators.TextMessageCreator;
+import jms.weatherqueue.application.publisher.messagecreators.TextMessageCreator;
 
 public class JmsMessageSenderTest extends TestWithMockito {
 

@@ -9,6 +9,12 @@
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'war'
+
+war {
+    baseName = 'WeatherQueue'
+    version = '1.0.0-BUILD-SNAPSHOT'
+}
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
@@ -27,6 +33,7 @@ dependencies {
 		activeMqVersion = '5.13.2'
 		slf4jVersion = '1.7.21'
 		mockitoVersion = '1.10.19'
+		javaxServletVersion = '3.1.0'
 	}
 
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -37,13 +44,17 @@ dependencies {
     testCompile "org.mockito:mockito-all:${mockitoVersion}"
     
     //Spring
+    compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
    	compile "org.springframework:spring-context-support:${springVersion}"
    	runtime "org.springframework:spring-web:${springVersion}"
    	runtime "org.springframework.batch:spring-batch-core:${springBatchVersion}"
    	runtime "org.springframework:spring-tx:${springBatchVersion}"
    	compile "org.springframework:spring-oxm:${springVersion}"
-   	compile "org.springframework:spring-jms:${springVersion}"   	
+   	compile "org.springframework:spring-jms:${springVersion}"
+   	compile "org.springframework:spring-webmvc:${springVersion}"
+   	
+   	compile "javax.servlet:javax.servlet-api:${javaxServletVersion}"
 }
 
 test {

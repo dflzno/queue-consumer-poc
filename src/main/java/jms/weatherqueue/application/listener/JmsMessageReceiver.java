@@ -1,4 +1,4 @@
-package jms.example.listener;
+package jms.weatherqueue.application.listener;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
