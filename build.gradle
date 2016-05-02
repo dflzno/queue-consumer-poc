@@ -13,7 +13,7 @@ apply plugin: 'war'
 
 war {
     baseName = 'WeatherQueue'
-    version = '1.0.0-BUILD-SNAPSHOT'
+    //version = '1.0.0-BUILD-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -34,14 +34,15 @@ dependencies {
 		slf4jVersion = '1.7.21'
 		mockitoVersion = '1.10.19'
 		javaxServletVersion = '3.1.0'
+		jacksonDatabindVersion = '2.7.4'
 	}
 
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"   
     
-	compile "org.apache.activemq:activemq-spring:${activeMqVersion}"
-
-    testCompile "org.testng:testng:${testNgVersion}"
-    testCompile "org.mockito:mockito-all:${mockitoVersion}"
+    //Web - Rest - Integration - Messaging
+    compile "javax.servlet:javax.servlet-api:${javaxServletVersion}" 	
+   	runtime "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+   	compile "org.apache.activemq:activemq-spring:${activeMqVersion}"
     
     //Spring
     compile "org.springframework:spring-core:${springVersion}"
@@ -54,7 +55,9 @@ dependencies {
    	compile "org.springframework:spring-jms:${springVersion}"
    	compile "org.springframework:spring-webmvc:${springVersion}"
    	
-   	compile "javax.servlet:javax.servlet-api:${javaxServletVersion}"
+   	//Test
+   	testCompile "org.testng:testng:${testNgVersion}"
+    testCompile "org.mockito:mockito-all:${mockitoVersion}"   	
 }
 
 test {

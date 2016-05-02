@@ -1,4 +1,4 @@
-package jms.weatherqueue.application.publisher;
+package jms.weatherqueue.application.messagepublication;
 
 import javax.jms.Destination;
 
@@ -7,7 +7,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
-import jms.weatherqueue.application.publisher.messagecreators.TextMessageCreator;
+import jms.weatherqueue.application.messagepublication.messagecreators.TextMessageCreator;
 
 /**
  * Class in charge of sending messages to a JMS Queue
@@ -21,7 +21,8 @@ public class JmsMessageSender {
 	private MessageCreator messageCreator;
 
 	/**
-	 * Reconfigures the JmsMessageSender with a client-specific MessageCreator
+	 * Reconfigures the JmsMessageSender with a client-specific MessageCreator. This class uses a 
+	 * {@link jms.weatherqueue.application.messagepublication.messagecreators.TextMessageCreator} as a default MessageCreator
 	 * @param messageCreator
 	 */
 	public void setMessageCreator(MessageCreator messageCreator) {

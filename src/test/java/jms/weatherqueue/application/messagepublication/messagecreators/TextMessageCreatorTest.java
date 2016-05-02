@@ -1,4 +1,4 @@
-package jms.weatherqueue.application.publisher.messagecreators;
+package jms.weatherqueue.application.messagepublication.messagecreators;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -15,6 +15,8 @@ import javax.jms.Session;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.testng.annotations.Test;
+
+import jms.weatherqueue.application.messagepublication.messagecreators.TextMessageCreator;
 
 public class TextMessageCreatorTest {
 	

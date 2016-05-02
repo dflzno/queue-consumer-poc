@@ -8,9 +8,7 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-
 	<context:component-scan base-package="jms.weatherqueue" />
-
 
 	<!-- =============================================== -->
 	<!-- JMS Common, Define JMS connectionFactory -->
@@ -43,7 +41,7 @@
 	</bean>
 
 	<!-- this is the Message Driven POJO (MDP) -->
-	<bean id="messageListener" class="jms.weatherqueue.application.listener.JmsMessageReceiver" />
+	<bean id="messageListener" class="jms.weatherqueue.application.messagelistening.JmsMessageReceiver" />
 
 	<!-- and this is the message listener container -->
 	<bean id="jmsContainer"

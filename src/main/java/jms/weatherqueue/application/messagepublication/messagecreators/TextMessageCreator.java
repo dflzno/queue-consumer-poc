@@ -1,4 +1,4 @@
-package jms.weatherqueue.application.publisher.messagecreators;
+package jms.weatherqueue.application.messagepublication.messagecreators;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
