@@ -35,9 +35,11 @@ dependencies {
 		mockitoVersion = '1.10.19'
 		javaxServletVersion = '3.1.0'
 		jacksonDatabindVersion = '2.7.4'
+		lombokVersion = '1.16.8'
 	}
 
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"   
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.projectlombok:lombok:${lombokVersion}" 
     
     //Web - Rest - Integration - Messaging
     compile "javax.servlet:javax.servlet-api:${javaxServletVersion}" 	

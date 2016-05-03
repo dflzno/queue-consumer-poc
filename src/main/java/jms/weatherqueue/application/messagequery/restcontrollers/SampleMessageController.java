@@ -30,7 +30,7 @@ public class SampleMessageController {
 		return new WeatherCondition(
 				"23", 
 				ZonedDateTime.now(ZoneId.of(ZoneId.SHORT_IDS.get("CST"))),
-				28, 
+				28,
 				"Sunny");
 	}
 
