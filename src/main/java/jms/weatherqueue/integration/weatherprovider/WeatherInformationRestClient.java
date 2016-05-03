@@ -10,8 +10,10 @@ import org.springframework.web.client.RestTemplate;
 
 import jms.weatherqueue.domain.LatitudeLongitudeElevationCoordinate;
 import jms.weatherqueue.domain.WeatherCondition;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class WeatherInformationRestClient {
 	
 	public static final String WEATHER_SERVICE_URL = "https://goo.gl/lgqHBz";
@@ -28,6 +30,7 @@ public class WeatherInformationRestClient {
 			result = Optional.of(response);
 		} catch (RestClientException ex) {
 			result = Optional.empty();
+			log.error("Exception while retrieving weather information.", ex);
 		}
 		
 		return result;

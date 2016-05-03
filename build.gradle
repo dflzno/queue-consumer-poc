@@ -23,6 +23,10 @@ repositories {
     mavenCentral()
 }
 
+configurations.all {
+	exclude group: "commons-logging", module: "commons-logging"
+}
+
 dependencies {
 
 	ext {
@@ -36,6 +40,8 @@ dependencies {
 		javaxServletVersion = '3.1.0'
 		jacksonDatabindVersion = '2.7.4'
 		lombokVersion = '1.16.8'
+		logbackVersion = '1.1.7'
+		jclOverSlf4jVersion = '1.7.21'
 	}
 
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -59,7 +65,11 @@ dependencies {
    	
    	//Test
    	testCompile "org.testng:testng:${testNgVersion}"
-    testCompile "org.mockito:mockito-all:${mockitoVersion}"   	
+    testCompile "org.mockito:mockito-all:${mockitoVersion}"   
+    
+    //Logging
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+    compile "org.slf4j:jcl-over-slf4j:${jclOverSlf4jVersion}"
 }
 
 test {
