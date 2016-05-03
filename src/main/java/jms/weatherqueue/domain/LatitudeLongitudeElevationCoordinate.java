@@ -1,10 +1,12 @@
 package jms.weatherqueue.domain;
 
+import lombok.Getter;
+
 public class LatitudeLongitudeElevationCoordinate {
 
-	private double latitude;
-	private double longitude;
-	private double elevation;
+	@Getter private double latitude;
+	@Getter private double longitude;
+	@Getter private double elevation;
 	
 	public LatitudeLongitudeElevationCoordinate(double latitude, double longitude, double elevation) {
 		super();
@@ -20,18 +22,5 @@ public class LatitudeLongitudeElevationCoordinate {
 		this.elevation = 0.0;
 	}
 
-	public double getLatitude() {
-		return latitude;
-	}
-
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-
-	public double getElevation() {
-		return elevation;
-	}	
 	
 }

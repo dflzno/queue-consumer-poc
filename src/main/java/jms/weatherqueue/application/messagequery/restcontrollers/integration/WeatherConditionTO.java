@@ -4,15 +4,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import jms.weatherqueue.domain.WeatherCondition;
+import lombok.Getter;
 
 @XmlRootElement(name = "weathercondition")
 public class WeatherConditionTO {
 
-	private String code;
-	private String date;
-	private int temperature;
-	private String description;
-	private String createdAt;
+	@Getter @XmlElement private String code;
+	@Getter @XmlElement private String date;
+	@Getter @XmlElement private int temperature;
+	@Getter @XmlElement private String description;
+	@Getter @XmlElement private String createdAt;
 	
 	public WeatherConditionTO() { }
 	
@@ -31,31 +32,6 @@ public class WeatherConditionTO {
 		this.temperature = from.getTemperature();
 		this.description = from.getText();
 		this.createdAt = from.getCreatedAt().toString();
-	}
-
-	@XmlElement
-	public String getCode() {
-		return code;
-	}
-
-	@XmlElement
-	public String getDate() {
-		return date;
-	}
-
-	@XmlElement
-	public int getTemperature() {
-		return temperature;
-	}
-
-	@XmlElement
-	public String getDescription() {
-		return description;
-	}
-
-	@XmlElement
-	public String getCreatedAt() {
-		return createdAt;
 	}
 		
 }

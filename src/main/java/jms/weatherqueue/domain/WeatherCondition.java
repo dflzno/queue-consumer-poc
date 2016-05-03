@@ -2,13 +2,15 @@ package jms.weatherqueue.domain;
 
 import java.time.ZonedDateTime;
 
+import lombok.Getter;
+
 public class WeatherCondition {
 
-	private String code;
-	private ZonedDateTime date;
-	private int temperature;
-	private String text;
-	private ZonedDateTime createdAt;
+	@Getter private String code;
+	@Getter private ZonedDateTime date;
+	@Getter private int temperature;
+	@Getter private String text;
+	@Getter private ZonedDateTime createdAt;
 		
 	public WeatherCondition(String code, ZonedDateTime date, int temperature, String text) {
 		super();
@@ -18,24 +20,4 @@ public class WeatherCondition {
 		this.text = text;
 		this.createdAt = ZonedDateTime.now();
 	}
-
-	public String getCode() {
-		return code;
-	}
-	
-	public ZonedDateTime getDate() {
-		return date;
-	}
-	
-	public int getTemperature() {
-		return temperature;
-	}
-	
-	public String getText() {
-		return text;
-	}
-
-	public ZonedDateTime getCreatedAt() {
-		return createdAt;
-	}	
 }
