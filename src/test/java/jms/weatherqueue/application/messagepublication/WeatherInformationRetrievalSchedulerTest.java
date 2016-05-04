@@ -3,6 +3,9 @@ package jms.weatherqueue.application.messagepublication;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,9 +23,9 @@ public class WeatherInformationRetrievalSchedulerTest extends TestWithMockito {
 	private WeatherInformationRetrievalScheduler testSuject;
 	
 	@Test
-	public void shouldRetrieveSomeWeatherInformation() {
+	public void shouldInvokeWeatherInformationProvider() {
 		// given
-		/* No assumptions */
+		when(weatherInfoProvider.getCurrentWeather(any(LatitudeLongitudeElevationCoordinate.class))).thenReturn(Optional.empty());
 		
 		// when
 		testSuject.execute();

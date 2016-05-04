@@ -2,16 +2,24 @@ package jms.weatherqueue.domain;
 
 import java.time.ZonedDateTime;
 
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherCondition {
 
-	@Getter private String code;
-	@Getter private ZonedDateTime date;
-	@Getter private int temperature;
-	@Getter private String text;
-	@Getter private ZonedDateTime createdAt;
-		
+	@Getter @Setter private String code;
+	@Getter @Setter private ZonedDateTime date;
+	@Getter @Setter private int temperature;
+	@Getter @Setter private String text;
+	@Getter @Setter private ZonedDateTime createdAt;
+			
 	public WeatherCondition(String code, ZonedDateTime date, int temperature, String text) {
 		super();
 		this.code = code;
