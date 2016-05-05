@@ -1,6 +1,6 @@
-package jms.weatherqueue.integration.weatherprovider;
+package jms.weatherqueue.integration.weatherprovider.yahoo;
 
-import static jms.weatherqueue.integration.weatherprovider.WeatherInformationRestClient.WEATHER_SERVICE_URL;
+import static jms.weatherqueue.integration.weatherprovider.yahoo.WeatherInformationRestClient.WEATHER_SERVICE_URL;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -36,7 +36,7 @@ public class WeatherInformationRestClientTest extends TestWithMockito {
 		LatitudeLongitudeElevationCoordinate coordinate = new LatitudeLongitudeElevationCoordinate(4.6810316, -74.047626);
 		when(restTemplate.getForEntity(URI.create(WEATHER_SERVICE_URL), WeatherCondition.class)).
 			thenReturn(new ResponseEntity<WeatherCondition>(
-					new WeatherCondition("44", ZonedDateTime.now(), 15, "Rainy"), HttpStatus.OK));
+					new WeatherCondition("44", ZonedDateTime.now(), 15, "Rainy", ZonedDateTime.now()), HttpStatus.OK));
 		
 		// when
 		Optional<WeatherCondition> weatherCondition = testSubject.getCurrentWeather(coordinate);

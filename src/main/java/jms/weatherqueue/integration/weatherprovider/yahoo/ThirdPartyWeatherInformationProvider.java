@@ -1,4 +1,4 @@
-package jms.weatherqueue.integration.weatherprovider;
+package jms.weatherqueue.integration.weatherprovider.yahoo;
 
 import java.util.Optional;
 

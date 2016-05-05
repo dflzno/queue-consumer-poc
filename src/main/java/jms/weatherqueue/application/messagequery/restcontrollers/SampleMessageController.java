@@ -31,7 +31,8 @@ public class SampleMessageController {
 				"23", 
 				ZonedDateTime.now(ZoneId.of(ZoneId.SHORT_IDS.get("CST"))),
 				28,
-				"Sunny");
+				"Sunny",
+				ZonedDateTime.now());
 	}
 
 }

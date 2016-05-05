@@ -1,6 +1,5 @@
 package jms.weatherqueue.application.messagepublication;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,19 @@ public class WeatherInformationRetrievalScheduler {
 	@Autowired
 	private WeatherInformationProvider weatherInfoProvider;
 	
+	@Autowired
+	private JmsMessageSender jmsSender;
+	
 	@Scheduled(fixedDelay = DELAY)
 	public void execute() {
-		log.debug("Running scheduled job at " + LocalDateTime.now());
 		Optional<WeatherCondition> weatherCondition = 
 				weatherInfoProvider.getCurrentWeather(new LatitudeLongitudeElevationCoordinate(LATITUDE, LONGITUDE));
-		log.error("Weather information: " + weatherCondition.orElse(null));
+		log.debug("Weather information retrieved: " + (weatherCondition.isPresent() ? weatherCondition.get() : "NONE"));
+		
+		if(weatherCondition.isPresent()) {
+			jmsSender.send(weatherCondition.toString());
+		} else {
+			log.debug("Skipping message publication...");
+		}
 	}
 }

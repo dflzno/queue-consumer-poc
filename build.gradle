@@ -38,7 +38,7 @@ dependencies {
 		slf4jVersion = '1.7.21'
 		mockitoVersion = '1.10.19'
 		javaxServletVersion = '3.1.0'
-		jacksonDatabindVersion = '2.7.4'
+		jacksonVersion = '2.7.4'
 		lombokVersion = '1.16.8'
 		logbackVersion = '1.1.7'
 		jclOverSlf4jVersion = '1.7.21'
@@ -49,8 +49,9 @@ dependencies {
     
     //Web - Rest - Integration - Messaging
     compile "javax.servlet:javax.servlet-api:${javaxServletVersion}" 	
-   	compile "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+   	compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
    	compile "org.apache.activemq:activemq-spring:${activeMqVersion}"
+   	compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
     
     //Spring
     compile "org.springframework:spring-core:${springVersion}"

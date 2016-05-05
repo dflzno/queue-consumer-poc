@@ -2,11 +2,12 @@ package jms.weatherqueue.domain;
 
 import lombok.Getter;
 
+@Getter
 public class LatitudeLongitudeElevationCoordinate {
 
-	@Getter private double latitude;
-	@Getter private double longitude;
-	@Getter private double elevation;
+	private double latitude;
+	private double longitude;
+	private double elevation;
 	
 	public LatitudeLongitudeElevationCoordinate(double latitude, double longitude, double elevation) {
 		super();

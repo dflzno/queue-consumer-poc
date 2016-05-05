@@ -1,4 +1,4 @@
-package jms.weatherqueue.integration.weatherprovider;
+package jms.weatherqueue.integration.weatherprovider.yahoo;
 
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertNotNull;
@@ -27,7 +27,7 @@ public class ThirdPartyWeatherInformationProviderTest extends TestWithMockito {
 	public void shouldReturnAWeatherCondition() {
 		// given
 		LatitudeLongitudeElevationCoordinate coordinate = new LatitudeLongitudeElevationCoordinate(4.6810316, -74.047626);
-		when(restClient.getCurrentWeather(coordinate)).thenReturn(Optional.of(new WeatherCondition("44", ZonedDateTime.now(), 15, "Rainy")));
+		when(restClient.getCurrentWeather(coordinate)).thenReturn(Optional.of(new WeatherCondition("44", ZonedDateTime.now(), 15, "Rainy", ZonedDateTime.now())));
 		
 		// when
 		Optional<WeatherCondition> weatherCondition = testSubject.getCurrentWeather(coordinate);
