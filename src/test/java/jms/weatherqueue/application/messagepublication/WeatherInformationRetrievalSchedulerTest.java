@@ -52,13 +52,32 @@ public class WeatherInformationRetrievalSchedulerTest extends TestWithMockito {
 		testSubject.execute();
 		
 		// then
-		verify(jmsSender, times(1)).send(weatherCondition.toString());
+		verify(jmsSender, times(1)).send(new WeatherConditionToXML().apply(weatherCondition).get());
 	}
 	
 	@Test
 	public void shouldNotInvokeJmsSenderBecauseNoWeatherConditionWasRetrieved() {
 		// given
 		when(weatherInfoProvider.getCurrentWeather(any(LatitudeLongitudeElevationCoordinate.class))).thenReturn(Optional.empty());
+		
+		// when
+		testSubject.execute();
+		
+		// then
+		verify(jmsSender, never()).send(anyString());
+	}
+	
+	@Test
+	public void shouldReconfigureTheWeatherProvider() {
+		// given
+		WeatherInformationProvider provider = new WeatherInformationProvider() {
+			
+			@Override
+			public Optional<WeatherCondition> getCurrentWeather(LatitudeLongitudeElevationCoordinate coordinate) {
+				return Optional.empty();
+			}
+		};
+		testSubject.setWeatherInformationProvider(provider);
 		
 		// when
 		testSubject.execute();

@@ -30,7 +30,7 @@ class WeatherInformationRestClient {
 		
 		try {
 			WeatherInformationResource response = restTemplate.getForEntity(URI.create(WEATHER_SERVICE_URL), WeatherInformationResource.class).getBody();
-			result = Optional.of(new FromYahooWeatherToWeatherCondition().apply(response));
+			result = new FromYahooWeatherToWeatherCondition().apply(response);
 		} catch (RestClientException ex) {
 			result = Optional.empty();
 			log.error("Exception while retrieving weather information.", ex);

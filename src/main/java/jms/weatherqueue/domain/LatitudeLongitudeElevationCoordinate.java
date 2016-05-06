@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class LatitudeLongitudeElevationCoordinate {
 
-	private double latitude;
-	private double longitude;
-	private double elevation;
+	private final double latitude;
+	private final double longitude;
+	private final double elevation;
 	
 	public LatitudeLongitudeElevationCoordinate(double latitude, double longitude, double elevation) {
 		super();

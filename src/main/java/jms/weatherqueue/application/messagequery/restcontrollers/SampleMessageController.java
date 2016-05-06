@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import jms.weatherqueue.application.messagequery.restcontrollers.integration.WeatherConditionTO;
+import jms.weatherqueue.application.integration.entities.WeatherConditionTO;
 import jms.weatherqueue.domain.WeatherCondition;
 
 @RestController

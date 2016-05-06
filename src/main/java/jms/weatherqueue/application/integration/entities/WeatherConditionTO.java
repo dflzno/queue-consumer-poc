@@ -1,12 +1,16 @@
-package jms.weatherqueue.application.messagequery.restcontrollers.integration;
+package jms.weatherqueue.application.integration.entities;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import jms.weatherqueue.domain.WeatherCondition;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @XmlRootElement(name = "weathercondition")
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeatherConditionTO {
 
 	@Getter @XmlElement private String code;
@@ -14,17 +18,6 @@ public class WeatherConditionTO {
 	@Getter @XmlElement private int temperature;
 	@Getter @XmlElement private String description;
 	@Getter @XmlElement private String createdAt;
-	
-	public WeatherConditionTO() { }
-	
-	public WeatherConditionTO(String code, String date, int temperature, String description, String createdAt) {
-		super();
-		this.code = code;
-		this.date = date;
-		this.temperature = temperature;
-		this.description = description;
-		this.createdAt = createdAt;
-	}
 	
 	public WeatherConditionTO(WeatherCondition from) {
 		this.code = from.getCode();

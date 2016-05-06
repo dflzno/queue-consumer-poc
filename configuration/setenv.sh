@@ -1,0 +1,1 @@
+JAVA_OPTS="-Dhttp.proxySet=true -Dhttp.proxyHost=172.31.118.251 -Dhttp.proxyPort=3128 -Dhttps.proxyHost=172.31.118.251 -Dhttps.proxyPort=3128 $JAVA_OPTS"

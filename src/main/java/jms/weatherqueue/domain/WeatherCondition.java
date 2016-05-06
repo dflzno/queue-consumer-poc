@@ -2,18 +2,22 @@ package jms.weatherqueue.domain;
 
 import java.time.ZonedDateTime;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import jms.weatherqueue.application.integration.adapters.WeatherConditionXmlAdapter;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@XmlJavaTypeAdapter(WeatherConditionXmlAdapter.class)
 public class WeatherCondition {
 
-	private String code;
-	private ZonedDateTime date;
-	private int temperature;
-	private String text;
-	private ZonedDateTime createdAt;
+	private final String code;
+	private final ZonedDateTime date;
+	private final int temperature;
+	private final String text;
+	private final ZonedDateTime createdAt;
 			
 	public WeatherCondition(String code, ZonedDateTime date, int temperature, String text, ZonedDateTime createdAt) {
 		super();
