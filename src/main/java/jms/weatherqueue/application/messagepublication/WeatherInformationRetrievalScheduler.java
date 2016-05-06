@@ -16,7 +16,7 @@ public class WeatherInformationRetrievalScheduler {
 	
 	private static final double LATITUDE = 32.762861;
 	private static final double LONGITUDE = -96.797954;
-	private static final int DELAY = 5000;
+	private static final int DELAY = 20000;
 	
 	@Autowired
 	private WeatherInformationProvider weatherInfoProvider;
@@ -31,7 +31,7 @@ public class WeatherInformationRetrievalScheduler {
 		log.debug("Weather information retrieved: " + (weatherCondition.isPresent() ? weatherCondition.get() : "NONE"));
 		
 		if(weatherCondition.isPresent()) {
-			jmsSender.send(weatherCondition.toString());
+			jmsSender.send(weatherCondition.get().toString());
 		} else {
 			log.debug("Skipping message publication...");
 		}

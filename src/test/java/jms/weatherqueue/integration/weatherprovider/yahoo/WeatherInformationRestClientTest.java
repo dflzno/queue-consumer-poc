@@ -7,7 +7,6 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URI;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
@@ -21,6 +20,7 @@ import org.testng.annotations.Test;
 import base.TestWithMockito;
 import jms.weatherqueue.domain.LatitudeLongitudeElevationCoordinate;
 import jms.weatherqueue.domain.WeatherCondition;
+import suppport.builders.WeatherInformationResourceTestBuilder;
 
 public class WeatherInformationRestClientTest extends TestWithMockito {
 
@@ -34,9 +34,9 @@ public class WeatherInformationRestClientTest extends TestWithMockito {
 	public void shouldReturnAWeatherCondition() {
 		// given
 		LatitudeLongitudeElevationCoordinate coordinate = new LatitudeLongitudeElevationCoordinate(4.6810316, -74.047626);
-		when(restTemplate.getForEntity(URI.create(WEATHER_SERVICE_URL), WeatherCondition.class)).
-			thenReturn(new ResponseEntity<WeatherCondition>(
-					new WeatherCondition("44", ZonedDateTime.now(), 15, "Rainy", ZonedDateTime.now()), HttpStatus.OK));
+		
+		when(restTemplate.getForEntity(URI.create(WEATHER_SERVICE_URL), WeatherInformationResource.class)).
+			thenReturn(new ResponseEntity<WeatherInformationResource>(WeatherInformationResourceTestBuilder.build(), HttpStatus.OK));
 		
 		// when
 		Optional<WeatherCondition> weatherCondition = testSubject.getCurrentWeather(coordinate);
@@ -50,7 +50,7 @@ public class WeatherInformationRestClientTest extends TestWithMockito {
 	public void shouldReturnAnEmptyResponseDueToAnException() {
 		// given
 		LatitudeLongitudeElevationCoordinate coordinate = null;
-		when(restTemplate.getForEntity(URI.create(WEATHER_SERVICE_URL), WeatherCondition.class)).thenThrow(new RestClientException("Some weird HTTP error."));
+		when(restTemplate.getForEntity(URI.create(WEATHER_SERVICE_URL), WeatherInformationResource.class)).thenThrow(new RestClientException("Some weird HTTP error."));
 		
 		// when
 		Optional<WeatherCondition> weatherCondition = testSubject.getCurrentWeather(coordinate);

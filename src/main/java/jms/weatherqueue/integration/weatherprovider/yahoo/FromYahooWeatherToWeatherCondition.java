@@ -14,5 +14,6 @@ public class FromYahooWeatherToWeatherCondition implements ToWeatherConditionCon
 				from.getQuery().getResults().getChannel().getItem().getCondition().getDescription(),
 				from.getQuery().getCreatedAt());
 	}
-
+	
+	
 }
