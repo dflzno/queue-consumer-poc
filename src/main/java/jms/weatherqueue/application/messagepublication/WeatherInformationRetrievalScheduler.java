@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WeatherInformationRetrievalScheduler {
 	
+	private static final String SKIPPING_MESSAGE_PUBLICATION = "Skipping message publication...";
 	private static final double LATITUDE = 32.762861;
 	private static final double LONGITUDE = -96.797954;
 	private static final int DELAY = 1000*60;
@@ -37,10 +38,10 @@ public class WeatherInformationRetrievalScheduler {
 			if(xmlRepresentation.isPresent()) {
 				jmsSender.send(xmlRepresentation.get());
 			} else {
-				log.debug("Skipping message publication...");
+				log.debug(SKIPPING_MESSAGE_PUBLICATION);
 			}
 		} else {
-			log.debug("Skipping message publication...");
+			log.debug(SKIPPING_MESSAGE_PUBLICATION);
 		}
 	}
 	
