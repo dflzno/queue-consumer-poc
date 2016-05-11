@@ -10,10 +10,39 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'war'
+apply plugin: 'com.bmuschko.cargo'
 
 war {
     baseName = 'WeatherQueue'
     //version = '1.0.0-BUILD-SNAPSHOT'
+}
+
+buildscript {
+	
+	ext {
+		gradleCargoVersion = '2.2.1'
+	}
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.bmuschko:gradle-cargo-plugin:${gradleCargoVersion}"
+    }
+}
+
+cargo {
+
+	containerId = 'tomcat8x'
+	
+	local {
+        installer {
+            installUrl = 'http://apache.osuosl.org/tomcat/tomcat-8/v8.5.0/bin/apache-tomcat-8.5.0.zip'
+            downloadDir = file("$buildDir/download")
+            extractDir = file("$buildDir/extract")
+        }
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -23,8 +52,8 @@ repositories {
     mavenCentral()
 }
 
-configurations.all {
-	exclude group: "commons-logging", module: "commons-logging"
+configurations {
+	compile.exclude group: "commons-logging", module: "commons-logging"
 }
 
 dependencies {
