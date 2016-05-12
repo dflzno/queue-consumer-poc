@@ -14,9 +14,7 @@ public class PingController {
 	
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	public ResponseEntity<String> ping() {
-		log.error("Logging with error!");
-		log.debug("Logging with debug!");
-		log.info("Logging with info!");
+		log.info("Ping requested to the application...");
 		return new ResponseEntity<String>("Ping successful!", HttpStatus.OK);
 	}
 
